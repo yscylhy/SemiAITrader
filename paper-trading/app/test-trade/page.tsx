@@ -75,7 +75,7 @@ export default function TestTrade() {
         <button onClick={getAccount}>查看账户</button>
         <button onClick={testBuy}>买入 AAPL x1</button>
       </div>
-      <pre style={{ background: '#f0f0f0', padding: 20 }}>{result}</pre>
+      <pre style={{ background: '#f0f0f0', padding: 20, color: '#000' }}>{result}</pre>
     </div>
   )
 }
