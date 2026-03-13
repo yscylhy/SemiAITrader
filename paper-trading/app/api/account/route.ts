@@ -1,8 +1,8 @@
 import { NextResponse } from 'next/server'
-import { createClient } from '../../../lib/supabase'
+import { createServerSupabaseClient } from '../../../lib/supabase-server'
 
 export async function POST() {
-  const supabase = createClient()
+  const supabase = await createServerSupabaseClient()
   const { error } = await supabase.rpc('init_account')
 
   if (error) {
@@ -18,7 +18,7 @@ export async function POST() {
 }
 
 export async function GET() {
-  const supabase = createClient()
+  const supabase = await createServerSupabaseClient()
   const { data, error } = await supabase
     .from('accounts')
     .select('*')

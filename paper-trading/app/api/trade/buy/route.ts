@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { createClient } from '../../../../lib/supabase'
+import { createServerSupabaseClient } from '../../../../lib/supabase-server'
 
 export async function POST(request: NextRequest) {
   const { symbol, quantity, price } = await request.json()
@@ -11,7 +11,7 @@ export async function POST(request: NextRequest) {
     )
   }
 
-  const supabase = createClient()
+  const supabase = await createServerSupabaseClient()
   const { data, error } = await supabase.rpc('execute_buy', {
     p_symbol: symbol.toUpperCase(),
     p_quantity: quantity,

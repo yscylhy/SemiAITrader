@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { createClient } from '../../../lib/supabase'
+import { createServerSupabaseClient } from '../../../lib/supabase-server'
 
 const FINNHUB_API_KEY = process.env.FINNHUB_API_KEY
 const CACHE_MINUTES = 15
@@ -11,7 +11,7 @@ export async function GET(request: NextRequest) {
     return NextResponse.json({ error: 'symbol is required' }, { status: 400 })
   }
 
-  const supabase = createClient()
+  const supabase = await createServerSupabaseClient()
 
   // 先查缓存
   const { data: cached } = await supabase
