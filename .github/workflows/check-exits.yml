@@ -1,0 +1,17 @@
+name: Check Exit Rules
+
+on:
+  schedule:
+    - cron: '*/5 * * * *'  # 每5分钟
+  workflow_dispatch:         # 允许手动触发
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger exit check
+        run: |
+          curl -X POST \
+            -H "Authorization: Bearer ${{ secrets.CRON_SECRET }}" \
+            -H "Content-Type: application/json" \
+            https://semi-ai-trader.vercel.app/api/check-exits
