@@ -13,10 +13,10 @@ export async function POST(request: NextRequest) {
   }
 
   const { data: positions, error } = await supabase
-    .from('positions')
-    .select('*, accounts(cash_balance)')
-    .not('exit_rules', 'eq', '{}')
-    .gt('quantity', 0)
+      .from('positions')
+      .select('*')
+      .not('exit_rules', 'eq', '{}')
+      .gt('quantity', 0)
 
   if (error) {
     return NextResponse.json({ error: error.message }, { status: 500 })
